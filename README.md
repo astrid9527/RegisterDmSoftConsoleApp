@@ -1,10 +1,10 @@
 # C# 免注册调用大漠插件（7.2149 版本）
 
-本文将介绍如何使用 C# 实现免注册调用大漠插件（7.2149 版本）。
+原文地址：[C# 免注册调用大漠插件](https://www.developerastrid.com/computer-vision/csharp-registration-dm/)
 
-源码地址：[https://github.com/astrid9527/RegisterDmSoftConsoleApp](https://github.com/astrid9527/RegisterDmSoftConsoleApp)
+本文介绍如何使用 C# 实现免注册调用大漠插件（7.2149 版本）。
 
-原文地址：[C# 免注册调用大漠插件](https://www.developerastrid.com/computer-vision/csharp-registration-free-call-to-the-desert-plug-in/)
+免注册调用大漠插件，实际上是使用 dmreg.dll 来配合实现，这个文件有 2 个导出接口 `SetDllPathW` 和 `SetDllPathA`。 `SetDllPathW` 对应 unicode，`SetDllPathA` 对应 ascii 接口。
 
 ## 一、下载大漠插件
 
@@ -14,41 +14,41 @@
 
 解压完成后，如下图所示：
 
-![dmsoft](https://cdn.developerastrid.com/202112071109488.png)
+![dmsoft](https://cdn.developerastrid.com/img/202112071109488.png)
 
 再解压 dm.rar、大漠类库生成工具.rar、免注册.rar，解压密码为：1234
 
 解压完成后，如下图所示：
 
-![dmsoft](https://cdn.developerastrid.com/202112071113586.png)
+![dmsoft](https://cdn.developerastrid.com/img/202112071113586.png)
 
 ## 二、生成大漠类库
 
 打开 **大漠类库生成工具** 文件夹，如下图所示：
 
-![大漠类库生成工具](https://cdn.developerastrid.com/202112071120559.png)
+![大漠类库生成工具](https://cdn.developerastrid.com/img/202112071120559.png)
 
 打开 **大漠类库生成工具 v24.0.exe** 文件，如下图所示：
 
-![大漠类库生成工具v24.0.exe](https://cdn.developerastrid.com/202112071121524.png)
+![大漠类库生成工具v24.0.exe](https://cdn.developerastrid.com/img/202112071121524.png)
 
 将 `dm\7.2149\dm.dll` 拖到 **大漠类库生成工具** 里面，如下图所示：
 
-![大漠类库生成工具](https://cdn.developerastrid.com/202112071128907.png)
+![大漠类库生成工具](https://cdn.developerastrid.com/img/202112071128907.png)
 
 类名选择**使用自定义类名**，指定类名输入 **DmSoftCustomClassName**（这里只是示例，你可以输入你喜欢的名字，如：abcde、aabbc、abab 等），如下图所示：
 
-![大漠类库生成工具](https://cdn.developerastrid.com/202112071131857.png)
+![大漠类库生成工具](https://cdn.developerastrid.com/img/202112071131857.png)
 
 点击生成按钮，如下图所示：
 
-![大漠类库生成工具](https://cdn.developerastrid.com/202112071133451.png)
+![大漠类库生成工具](https://cdn.developerastrid.com/img/202112071133451.png)
 
 打开 `dm\7.2149\Output\C#` 文件夹，可以看到生成的结果，如下图所示：
 
-![大漠类库生成工具](https://cdn.developerastrid.com/202112071135795.png)
+![大漠类库生成工具](https://cdn.developerastrid.com/img/202112071135795.png)
 
-生成的 obj.cs 即是使用在 C# 平台下的类库封装，稍后会用到。
+生成的 obj.cs 即是使用在 C# 平台下的类库封装，稍后在 C# 免注册调用大漠插件的示例中会用到。
 
 ## 三、创建控制台应用程序
 
@@ -58,15 +58,15 @@
 
 在项目中创建 **libs** 文件夹，用于放置大漠插件的 dll，如下图所示：
 
-![DmSoftTestConsoleApp](https://cdn.developerastrid.com/202112071144475.png)
+![DmSoftTestConsoleApp](https://cdn.developerastrid.com/img/202112071144475.png)
 
 **dm.dll** 在 `dm\7.2149` 文件夹下，如下图所示：
 
-![dm.dll](https://cdn.developerastrid.com/202112071146750.png)
+![dm.dll](https://cdn.developerastrid.com/img/202112071146750.png)
 
 **DmReg.dll** 在 `免注册\不注册调用dm.dll的方法 v11.0` 文件夹下，如下图所示：
 
-![DmReg.dll](https://cdn.developerastrid.com/202112071147810.png)
+![DmReg.dll](https://cdn.developerastrid.com/img/202112071147810.png)
 
 设置 dll 属性 **复制到输出目录** 为 **始终复制**：
 
@@ -74,7 +74,7 @@
 2. 在属性面板中，“复制到输出目录”选项，选择“始终复制”；
 3. 在 DmReg.dll 也重复上面的操作。
 
-![始终复制到输出目录](https://cdn.developerastrid.com/202112071200145.png)
+![始终复制到输出目录](https://cdn.developerastrid.com/img/202112071200145.png)
 
 ### 3.2 引入大漠类库
 
@@ -82,13 +82,13 @@
 
 将之前生成的大漠类库（obj.cs）复制到项目中的 DmSoft 文件夹，并改名为 DmSoftCustomClassName（可以改名，也可以不改名，还可以改成任意名，你喜欢就好……），如下图所示：
 
-![DmSoftTestConsoleApp](https://cdn.developerastrid.com/202112071155130.png)
+![DmSoftTestConsoleApp](https://cdn.developerastrid.com/img/202112071155130.png)
 
 ### 3.3 创建 Resources 文件夹
 
 在项目中创建 **Resources** 文件夹，用于放置大漠插件使用到的资源，比如图片、字库等，如下图所示：
 
-![DmSoftTestConsoleApp](https://cdn.developerastrid.com/202112071306542.png)
+![DmSoftTestConsoleApp](https://cdn.developerastrid.com/img/202112071306542.png)
 
 ### 3.4 创建大漠插件配置类
 
@@ -175,7 +175,7 @@ namespace DmSoftTestConsoleApp.DmSoft
 
 注意，在 .NET Core 中，无法使用 64 位进程加载 32 位 dll。解决方法是将程序设置为 32 位的。
 
-![DmSoftTestConsoleApp](https://cdn.developerastrid.com/202112071410731.png)
+![DmSoftTestConsoleApp](https://cdn.developerastrid.com/img/202112071410731.png)
 
 ## 四、测试
 
@@ -289,7 +289,7 @@ namespace DmSoftTestConsoleApp
 
 添加应用程序清单文件到项目中（项目 → 右键 → 添加 → 新建项 → 应用程序清单文件），如下图所示：
 
-![app.manifest](https://cdn.developerastrid.com/202112071451949.png)
+![app.manifest](https://cdn.developerastrid.com/img/202112071451949.png)
 
 打开 app.manifest 文件，将 `requestedExecutionLevel` 元素的 `level` 属性设置为 `highestAvailable`。
 
@@ -307,15 +307,19 @@ namespace DmSoftTestConsoleApp
 
 按 F5 运行程序，VS 将提示“此任务要求应用程序具有提升的权限。”，点击“使用其他凭据重新启动(R)”，如下图所示：
 
-![此任务要求应用程序具有提升的权限](https://cdn.developerastrid.com/202112071503379.png)
+![此任务要求应用程序具有提升的权限](https://cdn.developerastrid.com/img/202112071503379.png)
 
 VS 重新启动之后，按 F5 运行程序，screen.bmp 图片保存到 Resources 文件夹中。
 
-## 六、总结
+## 六、源码地址
 
-本文已经将如何使用 C# 免注册调用大漠插件的方法介绍完毕，解决方案的结构如下图所示：
+源码地址：[https://github.com/astrid9527/RegisterDmSoftConsoleApp](https://github.com/astrid9527/RegisterDmSoftConsoleApp)
 
-![DmSoftTestConsoleApp](https://cdn.developerastrid.com/202112071511426.png)
+## 七、总结
+
+本文已经完整地介绍了如何使用 C# 免注册调用大漠插件的方法，解决方案的结构如下图所示：
+
+![DmSoftTestConsoleApp](https://cdn.developerastrid.com/img/202112071511426.png)
 
 需要注意的地方有如下几点
 
@@ -323,7 +327,3 @@ VS 重新启动之后，按 F5 运行程序，screen.bmp 图片保存到 Resourc
 2. dm.dll 和 DmReg.dll 需要设置为**始终复制到输出目录**。
 3. 注意检查 `SetPath(path)` 方法中的 `path` 是否存在，不存在就创建。
 4. 在 VS 中设置程序以管理员身份运行。
-
-（完）
-
-
